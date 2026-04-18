@@ -1,6 +1,7 @@
-# Makerfabs ESP32 UWB DW3000
+# Makerfabs ESP32 UWB DW3000 FreeRTOS port
 
 **The DW3000 library in this repository was developed by NConcepts, not Makerfabs.  Makerfabs is simply responsible for maintaining the repository.**
+**It was modified for use in FreeRTOS environment**
 
 ```c++
 /*
@@ -8,6 +9,7 @@ Version:        V1.2
 Author:            Vincent
 Create Date:    2022/8/1
 Note:
+    2026/4/19    V1.2.RTOS.1:Minimal changes to use in FreeRTOS environment.
     2023/5/5     V1.2:The routines that can be used are placed in 
                     the example folder separately, with instructions 
                     added.
