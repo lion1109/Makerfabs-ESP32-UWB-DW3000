@@ -9,7 +9,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#ifndef DEBUG
+#define DEBUG 0
+#endif
+
+#if DEBUG
+#define debug_assert(condition, message) if (condition) { printf(message); } else {}
+#else
+#define debug_assert(condition, message) (void)0
+#endif
+
+#ifndef USE_ARDUINO
+#define USE_ARDUINO 0
+#endif
+
+#if USE_ARDUINO
 #include <Arduino.h>
+#endif
+
 #include <stdio.h>
 #include <inttypes.h>
 #include "dw3000_uart.h"

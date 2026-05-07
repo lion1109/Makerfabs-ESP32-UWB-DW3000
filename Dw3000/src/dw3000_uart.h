@@ -12,7 +12,7 @@
 
 void UART_init(void);
 void UART_putc(char data);
-void UART_puts(char* s);
+void UART_puts(const char* s);
 
 void test_run_info(unsigned char * s);
 

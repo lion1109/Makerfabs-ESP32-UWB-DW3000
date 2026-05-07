@@ -148,7 +148,9 @@
 #define PANADR 0x03
 #define LEN_PANADR 4
 
+#if USE_ARDUINO
 void readBytes(byte cmd, uint16_t offset, byte data[], uint16_t n);
+#endif
 void readSystemEventStatusRegister();
 void readSystemConfigurationRegister();
 void writeSystemConfigurationRegister();
@@ -160,18 +162,23 @@ void readChannelControlRegister();
 void writeChannelControlRegister();
 void readTransmitFrameControlRegister();
 void writeTransmitFrameControlRegister();
+#if USE_ARDUINO
 void setDoubleBuffering(boolean val);
 void setBit(byte data[], uint16_t n, uint16_t bit, boolean val);
 boolean getBit(byte data[], uint16_t n, uint16_t bit);
 void writeValueToBytes(byte data[], int32_t val, uint16_t n);
 void writeBytes(byte cmd, uint16_t offset, byte data[], uint16_t data_size);
 void writeByte(byte cmd, uint16_t offset, byte data);
+#endif
 void reset();
 void softReset();
 void idle();
+void spiFastFrequency(uint32_t freq);
 void spiBegin(uint8_t irq, uint8_t rst);
 void spiSelect(uint8_t ss);
+#if USE_ARDUINO
 void enableClock(byte clock);
+#endif
 int writetospi(uint16_t headerLength,  uint8_t *headerBuffer, uint16_t bodyLength, uint8_t *bodyBuffer);
 int readfromspi(uint16_t headerLength, uint8_t *headerBuffer, uint16_t readLength, uint8_t *readBuffer);
 

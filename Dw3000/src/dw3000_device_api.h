@@ -28,6 +28,7 @@
 /* MACRO */
 #define dwt_write32bitreg(addr,value)  dwt_write32bitoffsetreg(addr,0,value)
 #define dwt_read32bitreg(addr)     dwt_read32bitoffsetreg(addr,0)
+#define dwt_read16bitreg(addr)     dwt_read16bitoffsetreg(addr,0)
 #define dwt_writefastCMD(cmd)     dwt_writetodevice(cmd,0,0,0)
 
 #define dwt_or8bitoffsetreg(addr, offset, or_val) dwt_modify8bitoffsetreg(addr, offset, -1, or_val)
@@ -679,6 +680,8 @@ typedef enum
 /*                                                     API LIST                                                     */
 /********************************************************************************************************************/
 
+#define STATIC_FUNCTION_DECLS 0
+#if STATIC_FUNCTION_DECLS
 static void dwt_force_clocks(int clocks);
 
 static void dwt_xfer3000( uint32_t    regFileID,  //0x0, 0x04-0x7F ; 0x10000, 0x10004, 0x10008-0x1007F; 0x20000 etc
@@ -688,6 +691,7 @@ static void dwt_xfer3000( uint32_t    regFileID,  //0x0, 0x04-0x7F ; 0x10000, 0x
     spi_modes_e mode);
 
 static void _dwt_otpprogword32(uint32_t data, uint16_t address);
+#endif
 
 void setup_localdata();
 
@@ -1234,6 +1238,19 @@ uint32_t dwt_readrxtimestamplo32(void);
  */
 uint32_t dwt_readsystimestamphi32(void);
 
+
+/*! ------------------------------------------------------------------------------------------------------------------
+ * @brief This is used to read the high 32-bits of the system time
+ * This funtion returnes the systime not latched
+ *
+ * input parameters
+ *
+ * output parameters
+ *
+ * returns high 32-bits of system time timestamp
+ */
+void dwt_readsystime(uint8_t * timestamp);
+
 /*! ------------------------------------------------------------------------------------------------------------------
  * @brief This is used to turn off the transceiver
  *
@@ -1619,9 +1636,11 @@ void dwt_aon_write(uint16_t aon_address, uint8_t aon_write_data);
  */
 void dwt_otpread(uint16_t address, uint32_t *array, uint8_t length);
 
+#if STATIC_FUNCTION_DECLS
 static uint32_t _dwt_otpread(uint16_t address);
 
 static uint16_t get_sts_mnth (uint16_t cipher, uint8_t threshold, uint8_t shift_val);
+#endif
 
 /*! ------------------------------------------------------------------------------------------------------------------
  * @brief This is used to enable the frame filtering - (the default option is to

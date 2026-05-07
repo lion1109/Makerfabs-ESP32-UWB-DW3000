@@ -12,6 +12,12 @@
 
 #include <dw3000_device_api.h>
 #include <dw3000_port.h>
+
+#if USE_ARDUINO == 0
+#include "freertos/FreeRTOS.h"
+#include "freertos/semphr.h"
+#endif
+
 // ---------------------------------------------------------------------------
 //
 // NB: The purpose of this file is to provide for microprocessor interrupt enable/disable, this is used for
@@ -48,10 +54,22 @@
  *
  * returns the state of the DW1000 interrupt
  */
+
+#if USE_ARDUINO
 portMUX_TYPE my_mutex = portMUX_INITIALIZER_UNLOCKED;
+#else
+static SemaphoreHandle_t dw3000_mutex = NULL;
+#endif
+
 decaIrqStatus_t decamutexon(void)
 {
+#if USE_ARDUINO
     portENTER_CRITICAL(&my_mutex);
+#else
+    if (dw3000_mutex == NULL) dw3000_mutex = xSemaphoreCreateMutex();
+    xSemaphoreTake(dw3000_mutex, portMAX_DELAY); // block until free
+#endif
+    return 0; // NULL;
     /*portDISABLE_INTERRUPTS();
     decaIrqStatus_t s = port_GetEXT_IRQStatus();
 
@@ -79,7 +97,11 @@ decaIrqStatus_t decamutexon(void)
  */
 void decamutexoff(decaIrqStatus_t s)        // put a function here that re-enables the interrupt at the end of the critical section
 {
+#if USE_ARDUINO
     portEXIT_CRITICAL(&my_mutex);
+#else
+    if (dw3000_mutex != NULL) xSemaphoreGive(dw3000_mutex);
+#endif
     /*portENABLE_INTERRUPTS();
 
     if(s) { //need to check the port state as we can't use level sensitive interrupt on the STM ARM
