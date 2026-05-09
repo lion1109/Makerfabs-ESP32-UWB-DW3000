@@ -18,27 +18,27 @@ jobs:
       - name: Build example simple_tx
         run: |
           . /opt/esp/idf/export.sh
-          cd examples/simple_test/simple_tx
+          cd example/simple_test/simple_tx
           idf.py set-target esp32
           idf.py build
 
       - name: Build example simple_rx
         run: |
           . /opt/esp/idf/export.sh
-          cd examples/simple_test/simple_rx
+          cd example/simple_test/simple_rx
           idf.py set-target esp32
           idf.py build
 
       - name: Build example range_tx
         run: |
           . /opt/esp/idf/export.sh
-          cd examples/simple_test/range/range_tx
+          cd example/simple_test/range/range_tx
           idf.py set-target esp32
           idf.py build
 
       - name: Build example range_rx
         run: |
           . /opt/esp/idf/export.sh
-          cd examples/simple_test/range/range_rx
+          cd example/simple_test/range/range_rx
           idf.py set-target esp32
           idf.py build
