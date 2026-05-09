@@ -11,7 +11,7 @@ for d in example/range/range_{tx,rx} example/simple_test/simple_{tx,rx}; do
 	res=$?
 	if test "$res" != "0"; then results="$results\nerror in $d"; fi
 	idf.py fullclean
-	rm -rf build
+	rm -rf build sdkconfig.old sdkconfig
 	popd
 done
 
