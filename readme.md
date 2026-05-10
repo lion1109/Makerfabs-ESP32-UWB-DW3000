@@ -56,11 +56,11 @@ Compares to the DWM1000, the DWM3000 has advantages as below:
 
 # Usage
 
-## Install Library
+## Install as FreeRTOS Library
 
 **The library is provided by the customer. It was not developed by Makerfabs.**
 
-Copy "Dw3000" to Arduino library directory.
+Copy "Dw3000" to component directory of integrating project.
 
 ## Example
 
