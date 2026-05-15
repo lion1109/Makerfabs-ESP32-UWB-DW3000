@@ -8,5 +8,5 @@ idf_component_register(
          "src/dw3000_config_options.cpp"
          "src/dw3000_benchmark.cpp"
     INCLUDE_DIRS "src"
-    REQUIRES driver
+    REQUIRES driver esp_timer
 )
