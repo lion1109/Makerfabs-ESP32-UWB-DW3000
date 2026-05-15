@@ -339,6 +339,9 @@ void spiFastFrequency(uint32_t freq)
   if (changed && spi_device_initialized) spi_init_device();
 }
 
+static uint32_t spi_access_count = 0;
+uint32_t spiAccessCount() { return spi_access_count; }
+
 #define JUNK 0x00
 int readfromspi(uint16_t headerLength, uint8_t *headerBuffer, uint16_t readLength, uint8_t *readBuffer)
 {
@@ -366,6 +369,7 @@ int readfromspi(uint16_t headerLength, uint8_t *headerBuffer, uint16_t readLengt
     select_device();
 #endif
     esp_err_t ret = spi_device_transmit(*spi_current, &t); // synchrones SPI-Transfer
+    spi_access_count++;
 #if CS_MANUAL
     deselect_device();
 #endif
@@ -412,6 +416,7 @@ int writetospi(uint16_t headerLength, uint8_t *headerBuffer,
     select_device();
 #endif
     esp_err_t ret = spi_device_transmit(*spi_current, &t);
+    spi_access_count++;
 #if CS_MANUAL
     deselect_device();
 #endif

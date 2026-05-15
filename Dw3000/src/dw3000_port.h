@@ -176,6 +176,7 @@ void idle();
 void spiFastFrequency(uint32_t freq);
 void spiBegin(uint8_t irq, uint8_t rst);
 void spiSelect(uint8_t ss);
+uint32_t spiAccessCount();
 #if USE_ARDUINO
 void enableClock(byte clock);
 #endif
