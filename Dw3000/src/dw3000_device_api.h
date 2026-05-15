@@ -2565,6 +2565,17 @@ void dwt_configure_le_address(uint16_t addr, uint8_t leIndex);
  */
 void dwt_configuresfdtype(uint8_t sfdType);
 
+
+/*! ------------------------------------------------------------------------------------------------------------------
+ * @brief This function perfoms a short benchmark to determine the spi access and runtime of dwt_* calls
+ *
+ * input parameters none
+ * return total_benchmard_us [micro seconds]
+ *
+ */
+uint32_t dw3000_benchmark(void);
+
+
 #ifdef __cplusplus
 //}
 #endif
