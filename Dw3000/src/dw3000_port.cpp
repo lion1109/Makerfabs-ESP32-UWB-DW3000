@@ -345,8 +345,8 @@ uint32_t spiAccessCount() { return spi_access_count; }
 #define JUNK 0x00
 int readfromspi(uint16_t headerLength, uint8_t *headerBuffer, uint16_t readLength, uint8_t *readBuffer)
 {
-  // printf("readfromspi(...), _ss = %d)\n", _ss);
-  spi_transaction_t t;
+    // printf("readfromspi(...), _ss = %d)\n", _ss);
+    spi_transaction_t t;
     memset(&t, 0, sizeof(t));
 
     // Gesamtlänge = Header + zu lesende Bytes
